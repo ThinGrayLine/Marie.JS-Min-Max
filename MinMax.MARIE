@@ -1,0 +1,41 @@
+startLoop, load X
+	Input
+    Store X
+    
+loopMin, load min
+
+	
+    jump loopMax
+
+
+loopMax, load max
+    // maximum
+    Subt X
+    Skipcond 000
+    Store max
+    Jump counter
+    
+counter, load count
+    // decrements 10 by 1, until 0, --> stops program
+    Clear
+    Load count
+    Subt one
+    Store count
+    Skipcond 400
+    Jump startLoop
+    
+    // displays final results, terminates program
+    Load max
+    Output
+    Load min
+    Output
+    Halt
+    
+
+
+X, DEC 0
+Y, DEC 0
+one, DEC 1
+min, DEC 0
+max, DEC 7
+count, DEC 10
