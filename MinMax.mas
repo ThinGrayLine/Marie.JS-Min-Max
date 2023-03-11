@@ -1,41 +1,56 @@
+﻿// Start Loop, receives user input
 startLoop, load X
-	Input
+    Input
     Store X
-    
-loopMin, load min
 
-	
-    jump loopMax
-
-
-loopMax, load max
-    // maximum
-    Subt X
+// sees if a new min is found
+// issue: 0 - x is negative, so storeMin is always skipped
+// solution: store x first
+findMin, load MIN 
+	Subt X
     Skipcond 000
-    Store max
-    Jump counter
+    Jump storeMin
+
+    Jump findMax
+
+// stores new min
+storeMin, load X
+	Store MIN
+    Jump findMax
+
+// sees if new max is found
+findMax, load MAX
+	Subt X
+    Skipcond 800
+    Jump storeMax
     
+    Jump counter
+
+// stores max
+storeMax, load X
+	Store MAX
+    Jump counter
+
+// iterates over ten inputs
 counter, load count
-    // decrements 10 by 1, until 0, --> stops program
-    Clear
-    Load count
-    Subt one
+	Subt one
     Store count
     Skipcond 400
     Jump startLoop
     
     // displays final results, terminates program
-    Load max
+    Load MAX
     Output
-    Load min
+    Load MIN
     Output
-    Halt
     
+    Halt 
+    
+    // 1 2 5 -3 -5 -7 8 9 10 0
 
-
+// variable declaration
+MAX, DEC 0
+MIN, DEC 0
 X, DEC 0
-Y, DEC 0
 one, DEC 1
-min, DEC 0
-max, DEC 7
 count, DEC 10
