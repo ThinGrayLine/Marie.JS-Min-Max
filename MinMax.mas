@@ -1,16 +1,48 @@
-﻿// Start Loop, receives user input
+// Start Loop, receives user input
 startLoop, load X
     Input
     Store X
-
+    
 // sees if a new min is found
-// issue: 0 - x is negative, so storeMin is always skipped
-// solution: store x first
 findMin, load MIN 
-	Subt X
-    Skipcond 000
-    Jump storeMin
+	Skipcond 800
+    Jump negMin
+    
+    Jump posMin
+    
+    /Subt X
+    /Skipcond 000
+    /Jump findMax
 
+    /Jump storeMin
+
+
+negMin, load X
+	Skipcond 000
+    Add X
+    
+    Load X
+    Skipcond 800
+    Subt MIN
+    
+    Skipcond 800
+    Jump storeMin
+    
+    Jump findMax  
+
+posMin, load X
+	Skipcond 800
+    Add X
+    
+    Skipcond 800
+    Jump storeMin
+    
+    Load MIN
+    Subt X
+  
+    Skipcond 800
+    Jump storeMin
+    
     Jump findMax
 
 // stores new min
@@ -20,6 +52,7 @@ storeMin, load X
 
 // sees if new max is found
 findMax, load MAX
+	Load MAX
 	Subt X
     Skipcond 800
     Jump storeMax
