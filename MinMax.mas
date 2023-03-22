@@ -3,47 +3,26 @@ startLoop, load X
     Input
     Store X
     
+    // checks if count is at 10, if not, loop through normally
+    // if at 10, call initialize
+    Load count
+    Subt ten
+    Skipcond 400
+    Jump findMin
+    Jump initialize
+    
+// stores initial MIN (so 0 - X doesn't occur and break the program)    
+initialize, load X
+	Store MIN
+    Jump findMin
+    
 // sees if a new min is found
 findMin, load MIN 
+	Subt X
 	Skipcond 800
-    Jump negMin
-    
-    Jump posMin
-    
-    /Subt X
-    /Skipcond 000
-    /Jump findMax
-
-    /Jump storeMin
-
-
-negMin, load X
-	Skipcond 000
-    Add X
-    
-    Load X
-    Skipcond 800
-    Subt MIN
-    
-    Skipcond 800
-    Jump storeMin
-    
-    Jump findMax  
-
-posMin, load X
-	Skipcond 800
-    Add X
-    
-    Skipcond 800
-    Jump storeMin
-    
-    Load MIN
-    Subt X
-  
-    Skipcond 800
-    Jump storeMin
-    
     Jump findMax
+    
+    Jump storeMin
 
 // stores new min
 storeMin, load X
@@ -52,12 +31,11 @@ storeMin, load X
 
 // sees if new max is found
 findMax, load MAX
-	Load MAX
 	Subt X
-    Skipcond 800
-    Jump storeMax
-    
+    Skipcond 000
     Jump counter
+    
+    Jump storeMax
 
 // stores max
 storeMax, load X
@@ -69,7 +47,7 @@ counter, load count
 	Subt one
     Store count
     Skipcond 400
-    Jump startLoop
+    Jump startLoop // if count = 0, stops looping
     
     // displays final results, terminates program
     Load MAX
@@ -77,13 +55,14 @@ counter, load count
     Load MIN
     Output
     
-    Halt 
+    Halt // ends program
     
     // 1 2 5 -3 -5 -7 8 9 10 0
 
 // variable declaration
+X, DEC 0
 MAX, DEC 0
 MIN, DEC 0
-X, DEC 0
 one, DEC 1
 count, DEC 10
+ten, DEC 10
